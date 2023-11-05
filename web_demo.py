@@ -47,6 +47,10 @@ def _load_model_tokenizer(args):
     else:
         device_map = "auto"
 
+    if low_cpu_mem_usage  is not True:
+        low_cpu_mem_usage = True
+        logger.info("Changed `low_cpu_mem_usage` to `True` as required in 4bit and 8bit")
+
     model = AutoModelForCausalLM.from_pretrained(
         args.checkpoint_path,
         device_map=device_map,
